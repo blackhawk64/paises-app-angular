@@ -22,4 +22,10 @@ export class PaisService {
 
     return this.http.get<Pais[]>(url);
   }
+
+  verInfoPaisCodigo(codigo: string): Observable<Pais>{
+    const url = `${this.apiUrl}/alpha/${codigo}`;
+
+    return this.http.get<Pais>(url);
+  }
 }
