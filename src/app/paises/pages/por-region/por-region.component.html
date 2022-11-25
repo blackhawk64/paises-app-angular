@@ -1,1 +1,33 @@
-<p>por-region works!</p>
+<h3>Buscar por región</h3>
+<small><strong>Región activa: {{regionActiva | titlecase}}</strong></small>
+<hr>
+
+<h4>Seleccione región</h4>
+
+
+<div class="row">
+    <div class="col">
+        <!-- 1.- Primera forma condicional para agregar una clase -->
+        <!-- [class.active]="region === regionActiva" -->
+        <!-- 2.- Segunda forma condicional para agregar una clase -->
+        <!-- [ngClass]="{
+        'active': region === regionActiva
+        }" -->
+        <button 
+            class="btn btn-outline-primary me-1" 
+            [class.active]="region === regionActiva"
+            *ngFor="let region of regiones"
+            (click)="desglosarPaises(region)">
+            {{region | titlecase}}
+        </button>
+    </div>
+</div>
+<hr>
+<div class="alert alert-danger" *ngIf="hayError">
+    Parece que ocurrió un error al realizar la consulta.
+</div>
+<div class="row" *ngIf="paises.length > 0">
+    <div class="col">
+        <app-pais-tabla [paises]="paises"></app-pais-tabla>
+    </div>
+</div>

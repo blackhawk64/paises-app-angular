@@ -1,16 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Pais } from '../../interfaces/pais.interface';
+import { PaisService } from '../../services/pais.service';
 
 @Component({
   selector: 'app-por-region',
   templateUrl: './por-region.component.html',
-  styles: [
-  ]
+  styles: [],
 })
-export class PorRegionComponent implements OnInit {
+export class PorRegionComponent {
+  regiones: string[] = ['africa', 'americas', 'asia', 'europe', 'oceania'];
+  regionActiva: string = '';
+  hayError: boolean = false;
+  paises: Pais[] = [];
 
-  constructor() { }
+  constructor(private apiService: PaisService) {}
 
-  ngOnInit(): void {
+  desglosarPaises(region: string) {
+    if (this.regionActiva === region) {
+      return;
+    }
+
+    this.regionActiva = region.trim();
+    this.paises = [];
+    this.hayError = false;
+
+    this.apiService.verPaisesRegion(this.regionActiva).subscribe({
+      next: (response) => {
+        this.paises = response;
+      },
+      error: (error) => {
+        this.hayError = true;
+        this.paises = [];
+      },
+    });
   }
-
 }
