@@ -17,19 +17,20 @@ export class PorPaisComponent {
   constructor(private apiService: PaisService) { }
 
   buscar(termino: string){
-    this.termino = termino;
+    this.termino = termino.trim();
     this.hayError = false;
 
-    this.apiService.buscarPais(this.termino)
-      .subscribe({
+    if(this.termino.length > 0){
+      this.apiService.buscarPais(this.termino).subscribe({
         next: (response) => {
           this.paises = response;
         },
         error: (error) => {
           this.hayError = true;
           this.paises = [];
-        }
+        },
       });
+    }
   }
 
   sugerencias(termino: string){

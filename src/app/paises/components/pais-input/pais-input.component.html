@@ -3,7 +3,7 @@
         type="text" 
         name="termino" 
         class="form-control" 
-        placeholder="Buscar Pais..." 
+        [placeholder]="placeholder" 
         autocomplete="off"
         (input)="teclaPresionada()"
         [(ngModel)]="termino">
