@@ -29,7 +29,7 @@ export class PorRegionComponent {
       .buscarPaises(this.regionActiva, PorRegionComponent.endpoint)
       .subscribe({
         next: (response) => {
-          this.paises = response;
+          this.paises = response.sort((k1, k2) => k2.population - k1.population);
         },
         error: (error) => {
           this.hayError = true;

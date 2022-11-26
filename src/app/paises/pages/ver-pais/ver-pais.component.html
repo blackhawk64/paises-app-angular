@@ -1,81 +1,87 @@
-<div *ngIf="!pais ; else infoPais" class="alert alert-info">
-    Cargando informacion...
-</div>
+<div class="animate__animated animate__fadeInDown">
+    <div *ngIf="!pais ; else infoPais" class="alert alert-info">
+        Cargando informacion...
+    </div>
 
 
-<ng-template #infoPais>
-<div class="row">
-    <div class="col-12">
-        <h1>Esta visualizando a <small>{{ pais.name.common }}</small></h1>
-    </div>
-    <hr>
-    <div class="col-4 text-center">
-        <h3>Bandera</h3>
-        <img [src]="pais.flags.svg" alt="flag-{{ pais.name.common }}" width="200" height="100">
-    </div>
-    <div class="col">
-        <table class="table table-bordered">
-            <tbody>
-                <tr>
-                    <th scope="row">
-                        Nombre Oficial
-                    </th>
-                    <td>{{ pais.name.official }}</td>
-                </tr>
-                <tr>
-                    <th scope="row">
-                        Capital
-                    </th>
-                    <td>{{ pais.capital }}</td>
-                </tr>
-                <tr>
-                    <th scope="row">
-                        Población
-                    </th>
-                    <td>{{ pais.population | number }}</td>
-                </tr>
-                <tr>
-                    <th scope="row">
-                        Dominio
-                    </th>
-                    <td><pre>{{ pais.tld }}</pre></td>
-                </tr>
-                <tr>
-                    <th scope="row">
-                        Traducciones
-                    </th>
-                    <td>
-                        <span *ngFor="let traduccion of pais.translations | keyvalue" class="badge text-bg-primary me-1">
-                            {{traduccion.value.common}}
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">
-                        Monedas de curso legal
-                    </th>
-                    <td>
-                        <span *ngFor="let moneda of pais.currencies | keyvalue" class="badge text-bg-success me-1">
-                            {{moneda.value.symbol}} - {{moneda.value.name}}
-                        </span>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <hr>
-    <div class="col-12">
-        <p>
-            <button class="btn btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
-                aria-expanded="false" aria-controls="collapseExample">
-                Ver información completa en formato JSON ▼
-            </button>
-        </p>
-        <div class="collapse" id="collapseExample">
-            <div class="card card-body">
-                <pre>{{ pais | json }}</pre>
+    <ng-template #infoPais>
+        <div class="row">
+            <div class="col-12">
+                <h1>Esta visualizando a <small>{{ pais.name.common }}</small></h1>
+            </div>
+            <hr>
+            <div class="col-4 text-center">
+                <h3>Bandera</h3>
+                <img [src]="pais.flags.svg" alt="flag-{{ pais.name.common }}" width="200" height="100">
+            </div>
+            <div class="col">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                Nombre Oficial
+                            </th>
+                            <td>{{ pais.name.official }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                Capital
+                            </th>
+                            <td>{{ pais.capital }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                Población
+                            </th>
+                            <td>{{ pais.population | number }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                Dominio
+                            </th>
+                            <td>
+                                <pre>{{ pais.tld }}</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                Traducciones
+                            </th>
+                            <td>
+                                <span *ngFor="let traduccion of pais.translations | keyvalue"
+                                    class="badge text-bg-primary me-1">
+                                    {{traduccion.value.common}}
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                Monedas de curso legal
+                            </th>
+                            <td>
+                                <span *ngFor="let moneda of pais.currencies | keyvalue"
+                                    class="badge text-bg-success me-1">
+                                    {{moneda.value.symbol}} - {{moneda.value.name}}
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <hr>
+            <div class="col-12">
+                <p>
+                    <button class="btn btn-light" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        Ver información completa en formato JSON ▼
+                    </button>
+                </p>
+                <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+                        <pre>{{ pais | json }}</pre>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </ng-template>
 </div>
-</ng-template>

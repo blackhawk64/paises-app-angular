@@ -34,7 +34,7 @@ export class PorPaisComponent {
         .buscarPaises(this.termino, PorPaisComponent.endpoint)
         .subscribe({
           next: (response) => {
-            this.paises = response;
+            this.paises = response.sort((k1, k2) => k2.population - k1.population);
           },
           error: () => {
             this.hayError = true;
