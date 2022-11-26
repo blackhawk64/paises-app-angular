@@ -8,6 +8,7 @@ import { PaisService } from '../../services/pais.service';
   styles: [],
 })
 export class PorRegionComponent {
+  private static endpoint: string = 'region';
   regiones: string[] = ['africa', 'americas', 'asia', 'europe', 'oceania'];
   regionActiva: string = '';
   hayError: boolean = false;
@@ -24,14 +25,16 @@ export class PorRegionComponent {
     this.paises = [];
     this.hayError = false;
 
-    this.apiService.verPaisesRegion(this.regionActiva).subscribe({
-      next: (response) => {
-        this.paises = response;
-      },
-      error: (error) => {
-        this.hayError = true;
-        this.paises = [];
-      },
-    });
+    this.apiService
+      .buscarPaises(this.regionActiva, PorRegionComponent.endpoint)
+      .subscribe({
+        next: (response) => {
+          this.paises = response;
+        },
+        error: (error) => {
+          this.hayError = true;
+          this.paises = [];
+        },
+      });
   }
 }

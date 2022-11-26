@@ -14,6 +14,7 @@ import { PaisService } from '../../services/pais.service';
   ],
 })
 export class PorCapitalComponent {
+  private static endpoint: string = 'capital';
   termino: string = '';
   hayError: boolean = false;
   paises: Pais[] = [];
@@ -28,15 +29,17 @@ export class PorCapitalComponent {
     this.mostrarSugerencias = false;
 
     if (this.termino.length > 0) {
-      this.apiService.buscarPorCapital(this.termino).subscribe({
-        next: (response) => {
-          this.paises = response;
-        },
-        error: (error) => {
-          this.hayError = true;
-          this.paises = [];
-        },
-      });
+      this.apiService
+        .buscarPaises(this.termino, PorCapitalComponent.endpoint)
+        .subscribe({
+          next: (response) => {
+            this.paises = response;
+          },
+          error: () => {
+            this.hayError = true;
+            this.paises = [];
+          },
+        });
     }
   }
 
@@ -45,7 +48,7 @@ export class PorCapitalComponent {
     this.mostrarSugerencias = true;
     this.termino = termino;
 
-    this.apiService.buscarPorCapital(termino).subscribe({
+    this.apiService.buscarPaises(termino, PorCapitalComponent.endpoint).subscribe({
       next: (response) => {
         this.paisesSugeridos = response.splice(0, 5);
       },

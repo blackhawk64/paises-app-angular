@@ -13,16 +13,10 @@ export class PaisService {
     return new HttpParams().set('fields', 'name,capital,population,cca2,flags');
   }
 
-  constructor(private http: HttpClient) {}
-
-  buscarPais(termino: string): Observable<Pais[]> {
-    const url = `${this.apiUrl}/name/${termino}`;
-
-    return this.http.get<Pais[]>(url, { params: this.httpParams });
-  }
-
-  buscarPorCapital(termino: string): Observable<Pais[]> {
-    const url = `${this.apiUrl}/capital/${termino}`;
+  constructor(private http: HttpClient) { }
+  
+  buscarPaises(termino: string, endpoint: string) {
+    const url = `${this.apiUrl}/${endpoint}/${termino}`;
 
     return this.http.get<Pais[]>(url, { params: this.httpParams });
   }
@@ -31,11 +25,5 @@ export class PaisService {
     const url = `${this.apiUrl}/alpha/${codigo}`;
 
     return this.http.get<Pais>(url);
-  }
-
-  verPaisesRegion(region: string) {
-    const url = `${this.apiUrl}/region/${region}`;
-
-    return this.http.get<Pais[]>(url, { params: this.httpParams });
   }
 }
